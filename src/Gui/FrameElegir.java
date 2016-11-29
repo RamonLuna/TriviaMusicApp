@@ -117,7 +117,7 @@ public class FrameElegir extends javax.swing.JFrame {
             Statement stmt = conn.createStatement();
             ResultSet rs;
 
-            rs = stmt.executeQuery("SELECT nombreArtista FROM " + generosRec);
+            rs = stmt.executeQuery("SELECT nombreArtista FROM " + generosRec + " ORDER BY RAND()");
             for (int x = 0; x <= 3; x++) {
                 rs.next();
                 String lastName = rs.getString("nombreArtista");
@@ -149,7 +149,7 @@ public class FrameElegir extends javax.swing.JFrame {
             Statement stmt = conn.createStatement();
             ResultSet rs;
 
-            rs = stmt.executeQuery("SELECT nombreCancion FROM " + generosRec);
+            rs = stmt.executeQuery("SELECT nombreCancion FROM " + generosRec + " ORDER BY RAND()");
             for (int x = 0; x <= 3; x++) {
                 rs.next();
                 String lastName = rs.getString("nombreCancion");
