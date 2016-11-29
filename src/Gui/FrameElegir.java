@@ -7,7 +7,11 @@ package Gui;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.net.URL;
+import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,13 +19,17 @@ import javax.swing.ImageIcon;
  */
 public class FrameElegir extends javax.swing.JFrame {
 
+    String generosRec;
+
     /**
      * Creates new form FrameElegir
      */
-    public FrameElegir() {
+    public FrameElegir(String generosRec) {
+        this.generosRec = generosRec;
+
         initComponents();
         setSize(470, 700);
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Trivia Music App");
         this.getContentPane().setBackground(Color.white);
@@ -90,11 +98,38 @@ public class FrameElegir extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btnArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArtistaActionPerformed
         // TODO add your handling code here:
         dispose();
         JugarPartida partida = new JugarPartida();
         partida.setVisible(true);
+        nombreArtistaBd = new ArrayList<String>();
+
+        try {
+            // create a mysql database connection
+            String myDriver = "org.gjt.mm.mysql.Driver";
+            String myUrl = "jdbc:mysql://localhost/triviamusicapp?&useSSL=false";
+            //Vamos a crear una lista para poder seleccionar la BD
+
+            Class.forName(myDriver);
+            Connection conn = DriverManager.getConnection(myUrl, "root", "12345");
+            Statement stmt = conn.createStatement();
+            ResultSet rs;
+
+            rs = stmt.executeQuery("SELECT nombreArtista FROM " + generosRec);
+            for (int x = 0; x <= 3; x++) {
+                rs.next();
+                String lastName = rs.getString("nombreArtista");
+                nombreArtistaBd.add(lastName);
+            }
+            System.out.println(nombreArtistaBd);
+            conn.close();
+
+        } catch (Exception e) {
+            System.err.println("Hubo un error aqui");
+            System.err.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnArtistaActionPerformed
 
     private void btnCancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancionActionPerformed
@@ -102,6 +137,32 @@ public class FrameElegir extends javax.swing.JFrame {
         dispose();
         JugarPartida partida = new JugarPartida();
         partida.setVisible(true);
+        nombreCancionBd = new ArrayList<String>();
+        try {
+            // create a mysql database connection
+            String myDriver = "org.gjt.mm.mysql.Driver";
+            String myUrl = "jdbc:mysql://localhost/triviamusicapp?&useSSL=false";
+            //Vamos a crear una lista para poder seleccionar la BD
+
+            Class.forName(myDriver);
+            Connection conn = DriverManager.getConnection(myUrl, "root", "12345");
+            Statement stmt = conn.createStatement();
+            ResultSet rs;
+
+            rs = stmt.executeQuery("SELECT nombreCancion FROM " + generosRec);
+            for (int x = 0; x <= 3; x++) {
+                rs.next();
+                String lastName = rs.getString("nombreCancion");
+                nombreCancionBd.add(lastName);
+            }
+            System.out.println(nombreCancionBd);
+
+            conn.close();
+
+        } catch (Exception e) {
+            System.err.println("Hubo un error aqui");
+            System.err.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnCancionActionPerformed
 
     /**
@@ -134,11 +195,19 @@ public class FrameElegir extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameElegir().setVisible(true);
+                String a = "a";
+                new FrameElegir(a).setVisible(true);
             }
         });
     }
 
+    String nombreArtista;
+    String nombreCancion;
+    ArrayList<String> nombreCancionBd;
+    ArrayList<String> nombreArtistaBd;
+    ArrayList<URL> uriBd;
+    URL urlName;
+    String query;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnArtista;
     private javax.swing.JButton btnCancion;
