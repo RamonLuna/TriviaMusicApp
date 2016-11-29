@@ -5,7 +5,9 @@
  */
 package Gui;
 
+import jaco.mp3.player.MP3Player;
 import java.awt.Color;
+import java.net.URL;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,13 +21,13 @@ public class JugarPartida extends javax.swing.JFrame {
      */
     public JugarPartida() {
         initComponents();
-        setSize(470,700);
-        setLocationRelativeTo(null); 
+        setSize(470, 700);
+        setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Trivia Music App");
         this.getContentPane().setBackground(Color.white);
         setIconImage(new ImageIcon(getClass().getResource("/img/logo.png")).getImage());
-        
+
     }
 
     /**
@@ -119,28 +121,28 @@ public class JugarPartida extends javax.swing.JFrame {
         btnOpcion1.setBackground(Color.green);
         dispose();
         FrameGanaste ganaste = new FrameGanaste();
-        ganaste.setVisible(true);        
+        ganaste.setVisible(true);
     }//GEN-LAST:event_btnOpcion1ActionPerformed
 
     private void btnOpcion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcion2ActionPerformed
         // TODO add your handling code here:
         btnOpcion2.setBackground(Color.red);
         FramePerdiste perdiste = new FramePerdiste();
-        perdiste.setVisible(true);   
+        perdiste.setVisible(true);
     }//GEN-LAST:event_btnOpcion2ActionPerformed
 
     private void btnOpcion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcion3ActionPerformed
         // TODO add your handling code here:
         btnOpcion3.setBackground(Color.red);
         FramePerdiste perdiste = new FramePerdiste();
-        perdiste.setVisible(true);         
+        perdiste.setVisible(true);
     }//GEN-LAST:event_btnOpcion3ActionPerformed
 
     private void btnOpcion4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcion4ActionPerformed
         // TODO add your handling code here:
         btnOpcion4.setBackground(Color.red);
         FramePerdiste perdiste = new FramePerdiste();
-        perdiste.setVisible(true);         
+        perdiste.setVisible(true);
     }//GEN-LAST:event_btnOpcion4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -180,10 +182,10 @@ public class JugarPartida extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JugarPartida().setVisible(true);
+
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOpcion1;
     private javax.swing.JButton btnOpcion2;
