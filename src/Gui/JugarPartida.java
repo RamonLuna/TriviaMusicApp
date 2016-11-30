@@ -2,8 +2,11 @@ package Gui;
 
 import jaco.mp3.player.MP3Player;
 import java.awt.Color;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -11,14 +14,30 @@ import javax.swing.ImageIcon;
  * @author Dalia Vera
  */
 public class JugarPartida extends javax.swing.JFrame {
-    
-    String a="AQUI VA LA IPCOASD";
-    FrameElegir fe = new FrameElegir(a);
-    
+
+    String n1;
+    String n2;
+    String n3;
+    String n4;
+    URL u1;
+    URL u2;
+    URL u3;
+    URL u4;
+    MP3Player mp3;
+
     /**
      * Creates new form JugarPartida
      */
-    public JugarPartida() {
+    public JugarPartida(String n1, String n2, String n3, String n4, URL u1, URL u2, URL u3, URL u4) throws MalformedURLException {
+        this.n1 = n1;
+        this.n2 = n2;
+        this.n3 = n3;
+        this.n4 = n4;
+        this.u1 = u1;
+        this.u2 = u2;
+        this.u3 = u3;
+        this.u4 = u4;
+
         initComponents();
         setSize(470, 700);
         setLocationRelativeTo(null);
@@ -36,7 +55,12 @@ public class JugarPartida extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents() throws MalformedURLException {
+        URL[] datos = {u1, u2, u3, u4};
+        Random r = new Random();
+        URL uriAlAzar = datos[r.nextInt(4)];
+        mp3 = new MP3Player(uriAlAzar);
+        mp3.play();
 
         btnOpcion1 = new javax.swing.JButton();
         btnOpcion2 = new javax.swing.JButton();
@@ -51,7 +75,7 @@ public class JugarPartida extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         btnOpcion1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnOpcion1.setText(a);
+        btnOpcion1.setText(n1);
         btnOpcion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOpcion1ActionPerformed(evt);
@@ -61,7 +85,7 @@ public class JugarPartida extends javax.swing.JFrame {
         btnOpcion1.setBounds(10, 360, 440, 60);
 
         btnOpcion2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnOpcion2.setText("Opción 2");
+        btnOpcion2.setText(n2);
         btnOpcion2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOpcion2ActionPerformed(evt);
@@ -71,7 +95,7 @@ public class JugarPartida extends javax.swing.JFrame {
         btnOpcion2.setBounds(10, 430, 440, 60);
 
         btnOpcion3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnOpcion3.setText("Opción 3");
+        btnOpcion3.setText(n3);
         btnOpcion3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOpcion3ActionPerformed(evt);
@@ -81,7 +105,7 @@ public class JugarPartida extends javax.swing.JFrame {
         btnOpcion3.setBounds(10, 500, 440, 60);
 
         btnOpcion4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnOpcion4.setText("Opción 4");
+        btnOpcion4.setText(n4);
         btnOpcion4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOpcion4ActionPerformed(evt);
@@ -115,45 +139,55 @@ public class JugarPartida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void btnOpcion1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void btnOpcion1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        if(n1==n2){
         btnOpcion1.setBackground(Color.green);
         dispose();
         FrameGanaste ganaste = new FrameGanaste();
         ganaste.setVisible(true);
-    }                                          
+        mp3.stop();
+        }else{
+        btnOpcion1.setBackground(Color.red);
+        }
+    }
 
-    private void btnOpcion2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void btnOpcion2ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         btnOpcion2.setBackground(Color.red);
         FramePerdiste perdiste = new FramePerdiste();
         perdiste.setVisible(true);
-    }                                          
+        mp3.stop();
+    }
 
-    private void btnOpcion3ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void btnOpcion3ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         btnOpcion3.setBackground(Color.red);
         FramePerdiste perdiste = new FramePerdiste();
         perdiste.setVisible(true);
-    }                                          
+        mp3.stop();
+    }
 
-    private void btnOpcion4ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void btnOpcion4ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         btnOpcion4.setBackground(Color.red);
         FramePerdiste perdiste = new FramePerdiste();
         perdiste.setVisible(true);
-    }                                          
+        mp3.stop();
+    }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        dispose();
-        JugarPartida partida = new JugarPartida();
-        partida.setVisible(true);
-    }                                        
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+//        dispose();
+//        JugarPartida partida = new JugarPartida();
+//        partida.setVisible(true);
+        mp3.stop();
+    }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws MalformedURLException {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -180,7 +214,19 @@ public class JugarPartida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JugarPartida().setVisible(true);
+                String a = "a";
+                String b = "b";
+                String c = "b";
+                String d = "b";
+                URL e = null;
+                URL f = null;
+                URL g = null;
+                URL h = null;
+                try {
+                    new JugarPartida(a, b, c, d, e, f, g, h).setVisible(true);
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(JugarPartida.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             }
         });

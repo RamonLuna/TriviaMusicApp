@@ -21,10 +21,11 @@ public class FrameBienvenida extends javax.swing.JFrame {
         initComponents();
         setTitle("Trivia Music App");
         this.getContentPane().setBackground(Color.WHITE);
-        setSize(470,700);
+        setSize(470, 700);
         setResizable(false);
-        setLocationRelativeTo(null); 
-        setIconImage(new ImageIcon(getClass().getResource("/img/logo.png")).getImage());    }
+        setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/img/logo.png")).getImage());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

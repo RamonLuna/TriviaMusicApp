@@ -17,14 +17,6 @@ public class FrameEligeGenero extends JFrame {
 
     private String generos;
 
-    public String getGeneros() {
-        return generos;
-    }
-
-    public void setGeneros(String generos) {
-        this.generos = generos;
-    }
-
     /**
      * Creates new form FrameEligeGenero
      */

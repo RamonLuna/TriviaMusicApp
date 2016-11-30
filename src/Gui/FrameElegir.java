@@ -7,9 +7,12 @@ package Gui;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -20,9 +23,18 @@ import javax.swing.JOptionPane;
 public class FrameElegir extends javax.swing.JFrame {
 
     String generosRec;
+    String n1;
+    String n2;
+    String n3;
+    String n4;
+    URL u1;
+    URL u2;
+    URL u3;
+    URL u4;
 
     /**
      * Creates new form FrameElegir
+     * @param generosRec
      */
     public FrameElegir(String generosRec) {
         this.generosRec = generosRec;
@@ -102,9 +114,8 @@ public class FrameElegir extends javax.swing.JFrame {
     private void btnArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArtistaActionPerformed
         // TODO add your handling code here:
         dispose();
-        JugarPartida partida = new JugarPartida();
-        partida.setVisible(true);
         nombreArtistaBd = new ArrayList<String>();
+        uriBd = new ArrayList<URL>();
 
         try {
             // create a mysql database connection
@@ -117,27 +128,42 @@ public class FrameElegir extends javax.swing.JFrame {
             Statement stmt = conn.createStatement();
             ResultSet rs;
 
-            rs = stmt.executeQuery("SELECT nombreArtista FROM " + generosRec + " ORDER BY RAND()");
+            rs = stmt.executeQuery("SELECT nombreArtista, uri FROM " + generosRec + " ORDER BY RAND()");
             for (int x = 0; x <= 3; x++) {
                 rs.next();
-                String lastName = rs.getString("nombreArtista");
-                nombreArtistaBd.add(lastName);
+                String nombreArtista = rs.getString("nombreArtista");
+                URL uri = rs.getURL("uri");
+                uriBd.add(uri);
+                nombreArtistaBd.add(nombreArtista);
             }
-            System.out.println(nombreArtistaBd);
+            n1 = nombreArtistaBd.get(0);
+            n2 = nombreArtistaBd.get(1);
+            n3 = nombreArtistaBd.get(2);
+            n4 = nombreArtistaBd.get(3);
+            u1 = uriBd.get(0);
+            u2 = uriBd.get(1);
+            u3 = uriBd.get(2);
+            u4 = uriBd.get(3);
             conn.close();
 
         } catch (Exception e) {
             System.err.println("Hubo un error aqui");
             System.err.println(e.getMessage());
         }
+        JugarPartida partida = null;
+        try {
+            partida = new JugarPartida(n1,n2,n3,n4,u1,u2,u3,u4);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(FrameElegir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        partida.setVisible(true);
     }//GEN-LAST:event_btnArtistaActionPerformed
 
     private void btnCancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancionActionPerformed
         // TODO add your handling code here:
         dispose();
-        JugarPartida partida = new JugarPartida();
-        partida.setVisible(true);
         nombreCancionBd = new ArrayList<String>();
+        uriBd = new ArrayList<URL>();
         try {
             // create a mysql database connection
             String myDriver = "org.gjt.mm.mysql.Driver";
@@ -149,20 +175,37 @@ public class FrameElegir extends javax.swing.JFrame {
             Statement stmt = conn.createStatement();
             ResultSet rs;
 
-            rs = stmt.executeQuery("SELECT nombreCancion FROM " + generosRec + " ORDER BY RAND()");
             for (int x = 0; x <= 3; x++) {
+                rs = stmt.executeQuery("SELECT nombreCancion, uri FROM " + generosRec + " ORDER BY RAND()");
                 rs.next();
-                String lastName = rs.getString("nombreCancion");
-                nombreCancionBd.add(lastName);
+                String nombreCancion = rs.getString("nombreCancion");
+                URL uri = rs.getURL("uri");
+                uriBd.add(uri);
+                nombreCancionBd.add(nombreCancion);
             }
-            System.out.println(nombreCancionBd);
-
+            n1 = nombreCancionBd.get(0);
+            n2 = nombreCancionBd.get(1);
+            n3 = nombreCancionBd.get(2);
+            n4 = nombreCancionBd.get(3);
+            u1 = uriBd.get(0);
+            u2 = uriBd.get(1);
+            u3 = uriBd.get(2);
+            u4 = uriBd.get(3);
+//            System.out.println(nombreCancionBd);
+//            System.out.println(uriBd);
             conn.close();
 
         } catch (Exception e) {
             System.err.println("Hubo un error aqui");
             System.err.println(e.getMessage());
         }
+        JugarPartida partida = null;
+        try {
+            partida = new JugarPartida(n1,n2,n3,n4,u1,u2,u3,u4);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(FrameElegir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        partida.setVisible(true);
     }//GEN-LAST:event_btnCancionActionPerformed
 
     /**
@@ -201,13 +244,9 @@ public class FrameElegir extends javax.swing.JFrame {
         });
     }
 
-    String nombreArtista;
-    String nombreCancion;
     ArrayList<String> nombreCancionBd;
     ArrayList<String> nombreArtistaBd;
     ArrayList<URL> uriBd;
-    URL urlName;
-    String query;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnArtista;
     private javax.swing.JButton btnCancion;
